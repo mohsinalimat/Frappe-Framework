@@ -1,4 +1,7 @@
-# Fappe Framework
+<p align="center">
+  <img width="200" src="https://frappe.io/files/frappe.png" alt="ERPNext">
+  </p>
+
 
 ## Introduction: 
 
@@ -11,6 +14,7 @@
 ## Pre Requisites
 
   Before you can start with Frappe, be sure you understand the stack it's built on.
+ 
 
 ## Installation:
 
@@ -18,13 +22,20 @@
   
 ### STEP 1:
 
+ <strong>```Clone```</strong> main file 
+
+  ```
+      git clone https://github.com/Ranjith1022/Frappe-Framework.git
+  ```
+  
+### STEP 2:
+
+
   <strong>```RUN```</strong> frappe-installation script file
-
-  >> $ sh frappe-installation.sh
-
-
-
-
+   
+```
+  $ sh frappe-installation.sh
+```
 
 
 
