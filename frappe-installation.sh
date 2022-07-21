@@ -81,7 +81,6 @@ sudo -H pip3 install frappe-bench
 #Git allows multiple developers to work together on the same project with ease
 sudo apt install git -y
 sudo apt install python3.8-venv -y
-sudo apt install xdotool -y
 printf "${green}...${clear}"
 #Initialize the bench directory with Frappe framework using the following command
 cd ~
