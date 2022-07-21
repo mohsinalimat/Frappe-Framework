@@ -1,7 +1,10 @@
 <p align="center">
-  <img width="200" src="https://frappe.io/files/frappe.png" alt="ERPNext">
+  <img width="200" src="https://avatars.githubusercontent.com/u/836974?v=4" alt="Frappe">
   </p>
 
+<h1 align="center">
+Frappe
+</h1>
 
 ## Introduction: 
 
