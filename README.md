@@ -46,18 +46,10 @@ Frappe
   <strong>```check```</strong> below URL
   
 ```
-  http:localhost:8000
+  http://localhost:8000
 ```
 
-### Production Setup:
 
-  After working this ```http:localhost:8000``` it's takes 20-30 minutes automatically changed to production mode.
-  
-  After 20-30 minutes to <strong>```check```</strong> below URL
-  
-```
-  http:localhost
-```
 #
 
 ```diff
