@@ -1,1 +1,2 @@
+#Ten minutes after frappe framework move to production mode
 */10 * * * *      /home/production-mode.sh
