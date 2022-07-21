@@ -102,5 +102,8 @@ bench --site frappe-site install-app erpnext
 bench use frappe-site
 printf "\n\n${green} ALL SETUPS ARE COMPLETED....!${clear}\n"
 #To start using the bench, use the bench start command
+sudo cp -r production-mode.sh /home/
+sudo chmod a+x /home/production-mode.sh
+sh production-setup.sh
 printf "${yellow}Project Starting...${clear}\n"
 bench start
