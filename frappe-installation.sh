@@ -182,7 +182,7 @@ ${clear}"
 
 sudo mysql -uroot -p << EOF
 flush privileges;
-alter user root@localhost identified by 'Erp@123';
+alter user root@localhost identified by 'Frappe@123';
 flush privileges;
 EOF
 
@@ -220,13 +220,14 @@ default-character-set = utf8mb4
 
 
 printf "${yellow}
- __________________________
-$                          $
-$     Mysql root user      $
-$ Password is ${clear}${green}| Erp@123 | ${clear}${yellow} $
-$ _________________________$ ${clear}
+ _____________________________
+$                             $
+$     Mysql root user         $
+$ Password is ${clear}${green}| Frappe@123 | ${clear}${yellow} $
+$ ____________________________$ ${clear}
 
 "
+
 sudo systemctl start mysql
 
 
