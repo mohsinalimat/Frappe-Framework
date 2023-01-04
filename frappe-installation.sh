@@ -1,6 +1,6 @@
 ############################---Description---###################################
 #                                                                              #
-# Summary       : Frappe-Framework with ERPNext                                #
+# Summary       : Frappe-Framework                                             #
 # Support       : ranjithks@am.amrita.edu                                      #
 # Created date  : Jul 21,2022                                                  #
 # Latest Modified date : Oct 20,2022                                           #
@@ -27,7 +27,7 @@ clear='\033[0m'
 printf "${white}
 ############################---Description---####################################
 #                                                                               #
-# Summary               : Frappe-Framework with ERPNext                         #
+# Summary               : Frappe-Framework                                      #
 # Support               : ${yellow}ranjithks@am.amrita.edu${clear}                               #
 # Created date          : Jul 21,2022                                           #
 # Latest Modified date  : Oct 20,2022                                           #
@@ -142,27 +142,25 @@ sudo apt-get upgrade -y
 #The autoremove option removes packages that were automatically installed because some other package required them but, with those other packages removed, they are no longer needed.
 #Sometimes, an upgrade will suggest that you run this command.
 sudo apt autoremove -y
-
+sudo apt-get install -y git
 #This guide assumes you are using a personal computer, VPS or a bare-metal server.
 #You also need to be on a *nix system, so any Linux Distribution and MacOS is supported. However, we officially support only the following distributions.
 printf "${yellow}Installing nodejs${clear}\n"
 sudo apt install -y curl
 sudo curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+
 #Now you will add MariaDB to your server stack. ERPNext 12 requires MariaDB 10.2+ for proper operation.
 #Because Ubuntu 20.04 includes MariaDB 10.3 in its official repositories you can install this version using the apt command:
 #First, you will need to install Python and other packages required to build and set up Frappe framework.
 
 printf "${bld_yellow}
-
 Installing Resources
-
 ${clear}"
 
-sudo apt install -y nodejs mariadb-server redis-server python3-pip nginx python3-testresources
+sudo apt-get install -y python3-dev python3-setuptools python3-pip virtualenv nodejs python3.10-venv redis-server
+sudo apt install mariadb-server mariadb-client libmysqlclient-dev xvfb libfontconfig wkhtmltopdf
 printf "${bold}${green}
-
 Resources Installed...!
-
 ${offblod}${clear}\n"
 #Once the MariaDB is secured, log in to the MariaDB console with the following command
 #Next, you will need to change MariaDB Innodb file format to Barracuda. You can configure it by editing the file
@@ -177,12 +175,11 @@ printf "${green}
 | Press | ENTER | to continue |
 |       ---------             |
 |_____________________________|
-
 ${clear}"
 
 sudo mysql -uroot -p << EOF
 flush privileges;
-alter user root@localhost identified by 'Frappe@123';
+alter user root@localhost identified by 'Erp@123';
 flush privileges;
 EOF
 
@@ -220,14 +217,12 @@ default-character-set = utf8mb4
 
 
 printf "${yellow}
- _____________________________
-$                             $
-$     Mysql root user         $
-$ Password is ${clear}${green}| Frappe@123 | ${clear}${yellow} $
-$ ____________________________$ ${clear}
-
+ __________________________
+$                          $
+$     Mysql root user      $
+$ Password is ${clear}${green}| Erp@123 | ${clear}${yellow} $
+$ _________________________$ ${clear}
 "
-
 sudo systemctl start mysql
 
 
@@ -236,15 +231,12 @@ sudo npm install -g yarn
 printf "${yellow}Installing Frappe-Bench${clear}\n"
 #We recommend using either the Docker Installation or the Easy Install Script to setup a Production Environment.
 #For Development, you may choose either of the three methods to setup an instance.
-sudo pip3 install frappe-bench
+sudo -H pip3 install frappe-bench
 sudo systemctl restart mariadb
 sudo pip3 install frappe-bench
 printf "${green}Installing bench components...!${clear}\n"
-sudo -H pip3 install frappe-bench
 #Git is a free, open-source, distributed version control system that handles source code changes in software projects of all sizes.
 #Git allows multiple developers to work together on the same project with ease
-sudo apt install git -y
-sudo apt install python3.10-venv -y
 printf "${green}...${clear}"
 #Initialize the bench directory with Frappe framework using the following command
 cd ~
@@ -252,45 +244,49 @@ bench init --frappe-branch version-14 frappe-bench
 #change the directory to erpnext and create a new frappe site with the following command
 cd frappe-bench
 #Provide your password and hit Enter to create a new Frappe site
-bench new-site frappe-site
-bench use frappe-site
-
+bench new-site erp-site
+bench use erp-site
+sudo service nginx stop
+cd ~
+cd frappe-bench
+bench get-app payments
+bench get-app --branch version-14 erpnext
+bench --site erp-site install-app erpnex
+bench use erp-site
 printf "
 ${bld_green}
-
 (Project Strating-:)...)
-
 ${clear}
 "
 
 printf "${yellow}
 ####################---Project Details---###################
 ${clear}
- _______________________________________________________________________________
-|                                                                               |
-| ${green}# Project Path:${clear}${red} /home/frappe-bench${clear}                                              |
-|                                                                               |
-| ${green}# Site Path: ${clear}${red} /home/frappe-bench/sites/ ${clear}                                        |
-|                                                                               |
-| ${green}# MySQL root user Password: ${clear}${red} Frappe@123 ${clear}                                        |
-|                                                                               |
-| ${green}# Application URL: ${clear}${red}http://localhost:8000${clear}                                        |
-|                                                                               |
-| ${green}# Application Username: ${clear}${red} Administrator${clear}                                  |
-|_______________________________________________________________________________|\n
-${red}Notes:${clear} ${blue}[Please check the ${clear} ${magenta}'/home/frappe-bench/Project_Details.txt'${clear}${blue} file for above Project Details]${clear}\n
-
+ _____________________________________________________________________________
+|                                                                             |
+| ${green}# Project Path:${clear}${red} /home/frappe-framework${clear}                                      |
+|                                                                             |
+| ${green}# Site Path: ${clear}${red} /home/frappe-framework/sites/ ${clear}                                  |
+|                                                                             |
+| ${green}# MySQL root user Password: ${clear}${red} Erp@123 ${clear}                                         |
+|                                                                             |
+| ${green}# Application URL: ${clear}${red}http://localhost:8000${clear}                                      |
+|                                                                             |
+| ${green}# Application Username: ${clear}${red} Administrator${clear}                                |
+|_____________________________________________________________________________|
+${red}Notes:${clear} ${blue}[Please check the ${clear} ${magenta}'/home/frappe-framework/Project_Details.txt'${clear}${blue} file for above Project Details]${clear}\n
+"
 
 
 printf "
 ####################---Project Details---###################
  _____________________________________________________________________________
 |                                                                             |
-| # Project Path: /home/frappe-bench                                          |
+| # Project Path: /home/frappe-framework                                      |
 |                                                                             |
-| # Site Path:  /home/frappe-bench/sites/                                     |
+| # Site Path:  /home/frappe-framework/sites/                                 |
 |                                                                             |
-| # MySQL root user Password:  Frappe@123                                     |
+| # MySQL root user Password:  Erp@123                                        |
 |                                                                             |
 | # Application URL: http://localhost:8000                                    |
 |                                                                             |
